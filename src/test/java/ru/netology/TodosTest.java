@@ -32,8 +32,8 @@ class TodosTest {
     }
 
     @Test
-    public void shouldAddTaskAfterSearch() {
-        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+    public void shouldAddSeveralTaskAfterSearch() {
+        SimpleTask simpleTask = new SimpleTask(5, "Покупки");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
@@ -41,7 +41,7 @@ class TodosTest {
         Meeting meeting = new Meeting(
                 555,
                 "Выкатка 3й версии приложения",
-                "Приложение НетоБанка",
+                "Покупки",
                 "Во вторник после обеда"
         );
 
@@ -51,13 +51,13 @@ class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] expected = {epic};
-        Task[] actual = todos.search("Яйца");
+        Task[] expected = {simpleTask, meeting};
+        Task[] actual = todos.search("Покупки");
         Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldAddTaskAfterSearch1() {
+    public void shouldAddOneTaskAfterSearch() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -82,7 +82,7 @@ class TodosTest {
     }
 
     @Test
-    public void shouldAddTaskAfterSearch2() {
+    public void shouldAddNoTaskAfterSearch() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -101,9 +101,8 @@ class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] expected = {meeting};
-        Task[] actual = todos.search("Выкатка 3й версии приложения");
+        Task[] expected = {};
+        Task[] actual = todos.search("Экономика");
         Assertions.assertArrayEquals(expected, actual);
     }
-
 }
